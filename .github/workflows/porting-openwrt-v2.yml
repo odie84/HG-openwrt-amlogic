@@ -200,7 +200,7 @@ env:
 jobs:
   prepare:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+    if: github.event.repository.owner.id == github.event.sender.id
     outputs:
       date: ${{ steps.date.outputs.date }}
       devices_json: ${{ steps.generate_list.outputs.json_array }}
@@ -342,7 +342,7 @@ jobs:
 
   build_matrix:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+    if: github.event.repository.owner.id == github.event.sender.id
     needs: prepare
     strategy:
       fail-fast: false
@@ -375,7 +375,7 @@ jobs:
 
   release:
     runs-on: ubuntu-22.04
-    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
+    if: github.event.repository.owner.id == github.event.sender.id
     needs: [prepare, build_matrix]
     
     steps:
